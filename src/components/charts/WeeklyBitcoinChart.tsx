@@ -18,7 +18,7 @@ interface CardProps {
 
 // Componente de tarjeta para envolver el gráfico
 const Card = ({ children, title }: CardProps) => (
-	<div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+	<div className="bg-gray-800 p-3 w-full rounded-lg shadow-lg">
 		<h2 className="text-xl font-bold mb-4 text-gray-200">{title}</h2>
 		{children}
 	</div>

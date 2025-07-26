@@ -1,20 +1,20 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 
-const BitcoinChartPage = React.lazy(
-	() => import('../components/charts/WeeklyBitcoinChart'),
+const WeeklyBitcoinChart = lazy(
+	() => import('@/components/charts/WeeklyBitcoinChart'),
 );
 
-const BitcoinChartPageWrapper = () => {
+const BitcoinChartPage = () => {
 	return (
 		<div className="flex flex-col items-center justify-center min-h-screen">
 			<h2 className="text-2xl font-bold mb-4 text-yellow-400">
 				Precio de Bitcoin (últimos 7 días)
 			</h2>
-			<React.Suspense fallback={<div>Cargando gráfico...</div>}>
-				<BitcoinChartPage />
-			</React.Suspense>
+			<Suspense fallback={<div>Cargando gráfico...</div>}>
+				<WeeklyBitcoinChart />
+			</Suspense>
 		</div>
 	);
 };
 
-export default BitcoinChartPageWrapper;
+export default BitcoinChartPage;

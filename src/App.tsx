@@ -20,6 +20,7 @@ function App() {
 					<SidebarTrigger />
 
 					{/* Mis rutas */}
+					{/* TODO: usar un skeleton */}
 					<Routes>
 						<Route path="/" element={<HomePage />} />
 						<Route
