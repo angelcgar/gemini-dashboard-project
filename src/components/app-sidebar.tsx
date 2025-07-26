@@ -14,29 +14,14 @@ import {
 // Menu items.
 const items = [
 	{
-		title: 'Home',
-		url: '#',
+		title: 'Inicio',
+		url: '/',
 		icon: Home,
 	},
 	{
-		title: 'Inbox',
-		url: '#',
-		icon: Inbox,
-	},
-	{
-		title: 'Calendar',
-		url: '#',
+		title: 'Bitcoin (7 días)',
+		url: '/bitcoin',
 		icon: Calendar,
-	},
-	{
-		title: 'Search',
-		url: '#',
-		icon: Search,
-	},
-	{
-		title: 'Settings',
-		url: '#',
-		icon: Settings,
 	},
 ];
 
