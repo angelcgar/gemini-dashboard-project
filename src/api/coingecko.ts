@@ -1,11 +1,5 @@
 import axios from 'axios';
-import type { CoinGeckoMarketChartResponse } from '../types/coingecko.types';
-
-export interface TiposDeRespuesta {
-    prices:        Array<number[]>;
-    market_caps:   Array<number[]>;
-    total_volumes: Array<number[]>;
-}
+import type { CoinGeckoMarket, CoinGeckoMarketChartResponse } from '../types/coingecko.types';
 
 // Variables para la configuración de la API
 const API_BASE_URL = 'https://api.coingecko.com/api/v3';
@@ -41,6 +35,28 @@ export const getMarketChart = async (
         return response.data;
     } catch (error) {
         console.error(`Error fetching market chart for ${coinId}:`, error);
+        throw error;
+    }
+};
+
+/**
+ * Fetches the top 10 cryptocurrencies by market capitalization.
+ * @returns A promise that resolves with a list of the top 10 coins.
+ */
+export const getTopCoins = async (): Promise<CoinGeckoMarket[]> => {
+    try {
+        const response = await apiClient.get<CoinGeckoMarket[]>('/coins/markets', {
+            params: {
+                vs_currency: 'usd',
+                order: 'market_cap_desc',
+                per_page: 10,
+                page: 1,
+                sparkline: false,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching top coins:', error);
         throw error;
     }
 };

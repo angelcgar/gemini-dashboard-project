@@ -8,6 +8,7 @@ import { AppSidebar } from '@/components/app-sidebar';
 // Páginas
 import HomePage from './pages/HomePage';
 const BitcoinChartPage = lazy(() => import('./pages/BitcoinChartPage'));
+const TopCoinsPage = lazy(() => import('./pages/TopCoinsPage'));
 
 function App() {
 	return (
@@ -28,6 +29,14 @@ function App() {
 							element={
 								<Suspense fallback={<div className="p-8">Cargando...</div>}>
 									<BitcoinChartPage />
+								</Suspense>
+							}
+						/>
+						<Route
+							path="/mejores-monedas"
+							element={
+								<Suspense fallback={<div className="p-8">Cargando...</div>}>
+									<TopCoinsPage />
 								</Suspense>
 							}
 						/>

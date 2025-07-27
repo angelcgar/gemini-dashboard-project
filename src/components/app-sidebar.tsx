@@ -1,4 +1,4 @@
-import { Calendar, Home } from 'lucide-react';
+import { Calendar, Home, TrendingUp } from 'lucide-react';
 
 import {
 	Sidebar,
@@ -22,6 +22,11 @@ const items = [
 		title: 'Bitcoin (7 días)',
 		url: '/bitcoin',
 		icon: Calendar,
+	},
+	{
+		title: 'Mejores monedas del mercado actual',
+		url: '/mejores-monedas',
+		icon: TrendingUp,
 	},
 ];
 
