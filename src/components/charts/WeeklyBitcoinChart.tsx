@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
 	LineChart,
 	Line,
@@ -9,7 +8,8 @@ import {
 	Legend,
 	ResponsiveContainer,
 } from 'recharts';
-import { getMarketChart } from '../../api/coingecko';
+
+import type { CoinGeckoMarketChartResponse } from '@/types/coingecko.types';
 
 interface CardProps {
 	children: React.ReactNode;
@@ -24,58 +24,29 @@ const Card = ({ children, title }: CardProps) => (
 	</div>
 );
 
-const WeeklyBitcoinChart = () => {
-	const [chartData, setChartData] = useState<{ date: string; price: string }[]>(
-		[],
-	);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
+interface WeeklyBitcoinChartProps {
+	data: CoinGeckoMarketChartResponse;
+}
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				setLoading(true);
-				const data = await getMarketChart('bitcoin', 7);
-
-				// Formateamos los datos para que Recharts los entienda
-				const formattedData = data.prices.map((pricePoint) => ({
-					date: new Date(pricePoint[0]).toLocaleDateString(),
-					price: pricePoint[1].toFixed(2),
-				}));
-
-				setChartData(formattedData);
-				setError(null);
-			} catch (err) {
-				setError('No se pudieron cargar los datos del gráfico.');
-				console.error(err);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchData();
-	}, []);
-
-	if (loading) {
-		return <div className="text-center p-10">Cargando gráfico...</div>;
-	}
-
-	if (error) {
-		return <div className="text-center p-10 text-red-500">{error}</div>;
-	}
+const WeeklyBitcoinChart = ({ data }: WeeklyBitcoinChartProps) => {
+	// Formateamos los datos para que Recharts los entienda
+	const formattedData = data.prices.map((pricePoint) => ({
+		date: new Date(pricePoint[0]).toLocaleDateString(),
+		price: pricePoint[1].toFixed(2),
+	}));
 
 	return (
 		<Card title="Evolución del Precio de Bitcoin (Últimos 7 días)">
 			<ResponsiveContainer width="100%" height={400}>
 				<LineChart
-					data={chartData}
+					data={formattedData}
 					margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
 				>
 					<CartesianGrid strokeDasharray="3 3" stroke="#4A5568" />
 					<XAxis dataKey="date" stroke="#A0AEC0" />
 					<YAxis
 						stroke="#A0AEC0"
-						tickFormatter={(value) => `$${Number(value).toLocaleString()}`}
+						tickFormatter={(value) => `${Number(value).toLocaleString()}`}
 					/>
 					<Tooltip
 						contentStyle={{

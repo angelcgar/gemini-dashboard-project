@@ -2,14 +2,14 @@
 
 ## Tareas pendientes
 
-- [ ] Definir los tipos de los datos que se recibirán de la API de CoinGecko.
-- [ ] Implementar un sistema de manejo de errores para las llamadas a la API.
-- [ ] Añadir una libreria de componentes UI para mejora el diseño del dashboard.
+- [X] Definir los tipos de los datos que se recibirán de la API de CoinGecko.
+- [X] Implementar un sistema de manejo de errores para las llamadas a la API.
+- [X] Añadir una libreria de componentes UI para mejora el diseño del dashboard.
 
 ## Ideas para mejorar el dashboard
 
 1. Manejo de Estado Avanzado: Para una aplicación más compleja con múltiples llamadas a la API, considera usar React Query
-    - [ ] (@tanstack/react-query) o SWR. Estas librerías simplifican el cacheo de datos, la revalidación automática y el manejo de estados de carga/error de forma mucho más robusta.
+    - [X] (@tanstack/react-query). Estas librerías simplifican el cacheo de datos, la revalidación automática y el manejo de estados de carga/error de forma mucho más robusta.
 
 
 2. Interactividad Mejorada:
