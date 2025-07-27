@@ -1,4 +1,11 @@
 import axios from 'axios';
+import type { CoinGeckoMarketChartResponse } from '../types/coingecko.types';
+
+export interface TiposDeRespuesta {
+    prices:        Array<number[]>;
+    market_caps:   Array<number[]>;
+    total_volumes: Array<number[]>;
+}
 
 // Variables para la configuración de la API
 const API_BASE_URL = 'https://api.coingecko.com/api/v3';
@@ -18,19 +25,22 @@ const apiClient = axios.create({
  * Obtiene los datos históricos de una moneda para un gráfico.
  * @param {string} coinId - El ID de la moneda (ej. "bitcoin").
  * @param {number} days - El número de días a consultar.
- * @returns {Promise<object>}
+ * @returns {Promise<CoinGeckoMarketChartResponse>}
  */
-export const getMarketChart = async (coinId: string = 'bitcoin', days: number = 7): Promise<object> => {
-	try {
-		const response = await apiClient.get(`/coins/${coinId}/market_chart`, {
-			params: {
-				vs_currency: 'usd',
-				days: days,
-			},
-		});
-		return response.data;
-	} catch (error) {
-		console.error(`Error fetching market chart for ${coinId}:`, error);
-		throw error;
-	}
+export const getMarketChart = async (
+    coinId: string = 'bitcoin',
+    days: number = 7
+): Promise<CoinGeckoMarketChartResponse> => {
+    try {
+        const response = await apiClient.get<CoinGeckoMarketChartResponse>(`/coins/${coinId}/market_chart`, {
+            params: {
+                vs_currency: 'usd',
+                days: days,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching market chart for ${coinId}:`, error);
+        throw error;
+    }
 };

@@ -25,7 +25,9 @@ const Card = ({ children, title }: CardProps) => (
 );
 
 const WeeklyBitcoinChart = () => {
-	const [chartData, setChartData] = useState([]);
+	const [chartData, setChartData] = useState<{ date: string; price: string }[]>(
+		[],
+	);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
